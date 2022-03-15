@@ -14,7 +14,7 @@ body{
     -moz-osx-font-smoothing: grayscale;
 }
 .page-container{overflow: hidden;} /* Prevents unwanted scroll space when scroll FX used. */
-a,button{transition: background .3s ease-in-out;outline: none!important;} /* Prevent ugly blue glow on chrome and safari */
+a,button{transition: background .3s ease-in-out;outline: none!important;} /* Prevent blue selection glow on Chrome and Safari */
 a:hover{text-decoration: none; cursor:pointer;}
 
 
@@ -49,37 +49,6 @@ a:hover{text-decoration: none; cursor:pointer;}
 
 .bloc-lg{
 	padding:100px 20px;
-}
-
-/* = Full Screen Blocs 
--------------------------------------------------------------- */
-
-.bloc-fill-screen{
-	min-height:100vh;
-	display: flex;
-	flex-direction: column;
-	padding-top:20px;
-	padding-bottom:20px;
-}
-.bloc-fill-screen > .container{
-	align-self: flex-middle;
-	flex-grow: 1;
-	display: flex;
-	flex-wrap: wrap;
-}
-.bloc-fill-screen > .container > .row{
-	flex-grow: 1;
-	align-self: center;
-	width:100%;
-}
-.bloc-fill-screen .fill-bloc-top-edge, .bloc-fill-screen .fill-bloc-bottom-edge{
-	flex-grow: 0;
-}
-.bloc-fill-screen .fill-bloc-top-edge{
-	align-self: flex-start;
-}
-.bloc-fill-screen .fill-bloc-bottom-edge{
-	align-self: flex-end;
 }
 
 /* = Full Width Blocs 
@@ -205,25 +174,34 @@ a:hover{text-decoration: none; cursor:pointer;}
 /* = NavBar
 -------------------------------------------------------------- */
 
-.hero .hero-nav{
-	padding-left:inherit;
-	padding-right:inherit;
+/* Handle Multi Level Navigation */
+.dropdown-menu .dropdown-menu{
+	border:none}
+@media (min-width:576px){
+	
+.navbar-expand-sm .dropdown-menu .dropdown-menu{
+	border:1px solid rgba(0,0,0,.15);
+	position:absolute;
+	left:100%;
+	top:-7px}.navbar-expand-sm .dropdown-menu .submenu-left{
+	right:100%;
+	left:auto}}@media (min-width:768px){
+	.navbar-expand-md .dropdown-menu .dropdown-menu{
+	border:1px solid rgba(0,0,0,.15);
+	border:1px solid rgba(0,0,0,.15);
+	position:absolute;
+	left:100%;
+	top:-7px}.navbar-expand-md .dropdown-menu .submenu-left{
+	right:100%;
+	left:auto}}@media (min-width:992px){
+	.navbar-expand-lg .dropdown-menu .dropdown-menu{
+	border:1px solid rgba(0,0,0,.15);
+	position:absolute;
+	left:100%;
+	top:-7px}.navbar-expand-lg .dropdown-menu .submenu-left{
+	right:100%;
+	left:auto}
 }
-/* Handle Multi Level Navigation */.navbar-light .navbar-nav .nav-link {
-	color: rgb(64, 64, 64);
-}
-.btco-menu li > a {
-	padding: 10px 15px;
-	color: #000;
-}
-.btco-menu .active a:focus,.btco-menu li a:focus ,.navbar > .show > a:focus{
-	background: transparent;
-	outline: 0;
-}
-.dropdown-menu .show > .dropdown-toggle::after{
-	transform: rotate(-90deg);
-}
-
 /* = Bric adjustment margins
 -------------------------------------------------------------- */
 
@@ -264,8 +242,20 @@ button{
 	outline: none!important;
 }
 
+.a-block{
+	width:100%;
+	text-align:left;
+	display: inline-block;
+}
+.text-center .a-block{
+	text-align:center;
+}
 
 
+/*  Image Protection */
+.img-protected{
+	-webkit-touch-callout: none;
+}
 
 
 
@@ -284,6 +274,14 @@ button{
 
 
 
+
+.carousel-nav-icon{
+	fill: none;
+	stroke: #fff;
+	stroke-width: 2px;
+	fill-rule: evenodd;
+	stroke-linecap:round;
+}
 
 
 /* ScrollToTop button */
@@ -311,6 +309,97 @@ button{
 	fill-rule: evenodd;
 	stroke-linecap:round;
 }
+/* = Lightbox
+-------------------------------------------------------------- */
+
+a[data-lightbox]{
+	position: relative;
+	display: block;
+	text-align: center;
+}
+a[data-lightbox]:hover::before{
+	content:"+";
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial;
+	font-size:32px;
+	line-height: 42px;
+	width:50px;
+	height:50px;
+	margin-left:-25px;
+	border-radius: 50%;
+	background:rgba(0,0,0,.5);
+	color:#FFF;
+	font-weight:100;
+	z-index: 1;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+}
+a[data-lightbox]:hover img{
+	opacity: 0.6;
+	-webkit-animation-fill-mode: none;
+	animation-fill-mode:none;
+}
+.lightbox-caption{
+	padding: 20px;
+	color: #FFF;
+	background: rgba(0,0,0,.5);
+	position: absolute;
+	left: 15px;
+	right: 15px;
+	bottom: 5px;
+}
+.close-lightbox:hover,.next-lightbox:hover, .prev-lightbox:hover{
+	background:rgba(0,0,0,.5);
+}
+.next-lightbox, .prev-lightbox,.close-lightbox{
+	position: absolute;
+	padding:6px;
+	background:rgba(0,0,0,.3);
+	line-height:0;
+	transition: background .2s ease-in-out;
+	border-radius:.25rem;
+	border:none;
+	z-index:20;
+}
+.next-lightbox, .prev-lightbox{
+	top:45%;
+}
+.close-lightbox{
+	top:20px;
+	right:20px;
+}
+.next-lightbox{
+	right:25px;
+}
+.prev-lightbox{
+	left:25px;
+}
+.lightbox-prev-icon,.lightbox-next-icon,.lightbox-close-icon{
+	fill:none;
+	stroke: #fff;
+	stroke-width: 3px;
+	fill-rule: evenodd;
+	stroke-linecap:round;
+}
+.lightbox-close-svg{
+	pointer-events:none;
+}
+
+/* Framless */
+.frameless-lb{
+	border-radius: 0;
+	border:none;
+}
+.frameless-lb .modal-body{
+	padding:0;
+}
+.frameless-lb .lightbox-caption{
+	left:0;
+	right:0;
+	bottom:-16px;
+}
 
 /* = Custom Styling
 -------------------------------------------------------------- */
@@ -323,11 +412,16 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 }
 .h1-style{
 	width:100%;
-	font-family:Montserrat;
+	font-family:"Montserrat";
+	font-size:25px;
+	line-height:30px;
+	font-weight:300;
 }
 .p-style{
-	font-size:25px;
-	line-height:60px;
+	font-size:16px;
+	line-height:25px;
+	font-family:"Montserrat";
+	font-weight:300;
 }
 .p-2-style{
 	font-size:25px;
@@ -371,18 +465,8 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 }
 .bloc-padding-right{
 	padding-top:0px;
-	padding-left:102px;
-	padding-right:102px;
-}
-.h1-与瑚共生-style{
-	font-size:22px;
-	margin-top:0px;
-	font-family:"PT Sans";
-	font-weight:300;
-	width:93.33%;
-}
-.container-div-style{
-	width:13.17%;
+	padding-left:0px;
+	padding-right:0px;
 }
 .bloc-padding-left{
 	padding-left:0px;
@@ -397,12 +481,14 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 	padding-bottom:25px;
 }
 .h1-bloc-1-style{
-	font-size:15px;
+	font-size:14px;
 	width:100%;
-	font-family:"Open Sans";
+	font-family:"Ubuntu";
 	text-indent:px;
-	line-height:30px;
-	font-weight:400;
+	line-height:14px;
+	font-weight:100;
+	padding-bottom:5px;
+	padding-top:6px;
 }
 .img-style{
 	height:175px;
@@ -413,34 +499,68 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 	margin-bottom:8px;
 	width:250px;
 }
-.h1-whydesign-style{
-	font-family:"Berkshire Swash";
-	font-weight:100;
-	font-size:50px;
-	text-indent:15px;
-	letter-spacing:2px;
-	line-height:50px;
-}
 .h1-home-style{
-	font-family:"Josefin Sans";
+	font-family:"Montserrat";
 	font-weight:100;
-	font-size:22px;
+	font-size:30px;
 	width:100%;
-	line-height:22px;
+	line-height:30px;
+	padding-right:0px;
 }
 .bloc-bloc-0-padding-top{
 	padding-top:7px;
 }
 .h1-bloc-2-style{
-	font-size:15px;
+	font-size:14px;
 	margin-top:0px;
-	font-family:"Source Sans Pro";
+	font-family:"Ubuntu";
 	font-weight:300;
-	line-height:15px;
+	line-height:14px;
 }
 .img-bloc-1-style{
-	height:400px;
 	margin-bottom:10px;
+	height:200px;
+}
+.img-情人节心愿扭蛋机-bann-style{
+	height:120px;
+	margin-bottom:8px;
+}
+.h1-zi-完全实用手册-style{
+	font-family:"Lato";
+	font-weight:900;
+	font-size:30px;
+	padding-top:145px;
+	text-indent:-1px;
+}
+.h1-21-style{
+	font-size:30px;
+	font-family:"Lato";
+	font-weight:900;
+	padding-top:145px;
+}
+.img-img-61-style{
+	width:5000px;
+}
+.img-9-style{
+	width:5000px;
+}
+.img-8-style{
+	width:1478px;
+}
+.img-7-style{
+	width:5000px;
+}
+.h1-字体完全实用手册-style{
+	font-family:"Montserrat";
+	font-size:30px;
+}
+.h6-style{
+	font-family:"Montserrat";
+	font-size:15px;
+	line-height:25px;
+}
+.h1-bloc-8-style{
+	font-size:30px;
 }
 
 /* = Colour
@@ -451,11 +571,23 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 .bgc-black{
 	background-color:#000000;
 }
+.bgc-white{
+	background-color:#FFFFFF;
+}
 
 /* Text colour styles */
 
 .tc-white{
 	color:rgba(255,255,255,0.85)!important;
+}
+
+/* Link colour styles */
+
+.ltc-white{
+	color:rgba(255,255,255,0.85)!important;
+}
+.ltc-white:hover{
+	color:#cccccc!important;
 }
 
 /* Bloc image backgrounds */
